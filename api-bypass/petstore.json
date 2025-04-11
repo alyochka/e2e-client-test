@@ -1,0 +1,66 @@
+{
+  "info": { "title": "My API", "version": "1.0.0" },
+  "openapi": "3.0.0",
+  "paths": {
+    "/pets": {
+      "get": {
+        "tags": ["Pets"],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Pet" } }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": []
+      }
+    },
+    "/pet": {
+      "post": {
+        "tags": ["Pets"],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pet" } } }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/inserePetValidator" } }
+          }
+        },
+        "parameters": [],
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "nome": { "type": "string" },
+          "raca": { "type": "string" },
+          "idade": { "type": "number" }
+        },
+        "required": ["id", "nome", "raca", "idade"]
+      },
+      "inserePetValidator": {
+        "type": "object",
+        "properties": {
+          "nome": { "type": "string" },
+          "raca": { "type": "string" },
+          "idade": { "type": "number" },
+          "id": { "type": "number" }
+        },
+        "required": ["nome", "raca", "idade", "id"]
+      }
+    }
+  }
+}
+
