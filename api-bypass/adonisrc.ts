@@ -61,6 +61,16 @@ export default defineConfig({
         name: 'functional',
         timeout: 30000,
       },
+      {
+        files: ['tests/integration/**/*.spec(.ts|.js)'],
+        name: 'integration',
+        timeout: 60000,
+      },
+      {
+        files: ['tests/security/**/*.spec(.ts|.js)'],
+        name: 'security',
+        timeout: 120000,
+      },
     ],
     forceExit: false,
   },

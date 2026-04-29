@@ -11,7 +11,12 @@
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "security:scan": "cve-lite . --fail-on critical --usage",
+    "security:report": "cve-lite . --report cve-report --no-open --usage",
+    "security:fix": "cve-lite . --fix",
+    "generate:openapi": "node --loader ts-node-maintained/esm scripts/fetch-openapi.ts",
+    "generate:client": "npm run generate:openapi && npx orval"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
@@ -29,13 +34,15 @@
     "#database/*": "./database/*.js",
     "#start/*": "./start/*.js",
     "#tests/*": "./tests/*.js",
-    "#config/*": "./config/*.js"
+    "#config/*": "./config/*.js",
+    "#client/*": "./app/client/*.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^7.8.2",
     "@adonisjs/eslint-config": "^2.0.0",
     "@adonisjs/prettier-config": "^1.4.0",
     "@adonisjs/tsconfig": "^1.4.0",
+    "@japa/api-client": "^3.0.3",
     "@japa/assert": "^4.0.1",
     "@japa/plugin-adonisjs": "^4.0.0",
     "@japa/runner": "^4.2.0",
