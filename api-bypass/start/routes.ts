@@ -1,19 +1,12 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
 import router from '@adonisjs/core/services/router'
-import axios from 'axios'
 
 router.get('/', async () => 'It works!')
 
-axios.defaults.baseURL = 'http://localhost:3333'
-
+const AuthController = () => import('#controllers/auth_controller')
 const BypassController = () => import('#controllers/bypass_controller')
+const MocksController = () => import('#controllers/mocks_controller')
+
+router.post('/auth/login', [AuthController, 'login'])
 router.get('/pets', [BypassController, 'index'])
 router.post('/pet', [BypassController, 'create'])
+router.get('/mocks', [MocksController, 'index'])
