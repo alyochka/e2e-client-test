@@ -1,25 +1,14 @@
-/*
-*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
 import router from '@adonisjs/core/services/router'
 import openapi from '@foadonis/openapi/services/main'
+import { middleware } from '#start/kernel'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
-
+const AuthController = () => import('#controllers/auth_controller')
 const PetsController = () => import('#controllers/pets_controller')
+
+router.post('/auth/login', [AuthController, 'login'])
+
 router.get('/pets', [PetsController, 'index'])
-router.post('/pet', [PetsController, 'create'])
+router.post('/pet', [PetsController, 'create']).middleware(middleware.bearerAuth())
 
 openapi.registerRoutes()
 router.get('/docs', () => openapi.generateUi('/api'))

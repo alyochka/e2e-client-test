@@ -4,7 +4,7 @@ export default defineConfig({
   ui: 'scalar',
   document: {
     info: {
-      title: 'My API',
+      title: 'Api Pets',
       version: '1.0.0',
     },
   },
